@@ -44,7 +44,7 @@ while(std::getline(std::cin,input)){
     }
   }
     if(!found){
-      std::cout<<input.substr(5)<<" : not found\n";
+      std::cout<<input.substr(5)<<": not found\n";
      }
    std::cout<<"$ "; 
     } 
