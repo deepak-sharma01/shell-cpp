@@ -29,6 +29,7 @@ while(std::getline(std::cin,input)){
 
    else if(input.rfind("echo ",0)==0) {    
     std:: cout<<input.substr(5)<<std::endl;
+    std::cout<<"$ ";
   }
    
   
