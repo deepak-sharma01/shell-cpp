@@ -58,17 +58,18 @@ while(std::getline(std::cin,input)){
     std::stringstream ss(path);
     std::string dir;
 
-    vector<string> exts = {".exe",".bat",".cmd",".com",""};
+    // vector<string> exts = {".exe",".bat",".cmd",".com",""};
 
 
     while(std::getline(ss,dir,';')){
-      for(auto& ext : exts){
-         std::string full = dir + "\\"+ cmd + ext ;
-      if(_access(full.c_str(),0) == 0){
+      // for(auto& ext : exts){
+        //  std::string full = dir + "\\"+ cmd + ext ;
+        std::string full = dir + "/"+cmd;
+      if(_access(full.c_str(),X_OK) == 0){
         std::cout<<input<<" is "<<full<<endl;
         found = true;
         break;
-      }
+      // }
       }
       if(found) break;
     }
