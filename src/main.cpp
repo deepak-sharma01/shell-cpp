@@ -3,6 +3,7 @@
 #include<cstdlib>
 #include<sstream>
 #include<vector>
+#include<unistd.h>
 // #include<io.h>
 using namespace std;
 
@@ -66,7 +67,7 @@ while(std::getline(std::cin,input)){
         //  std::string full = dir + "\\"+ cmd + ext ;
         std::string full = dir + "/"+cmd;
       if(access(full.c_str(),X_OK) == 0){
-        std::cout<<input<<" is "<<full<<endl;
+        std::cout<<cmd<<" is "<<full<<endl;
         found = true;
         break;
       // }
