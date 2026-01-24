@@ -89,13 +89,18 @@ while(std::getline(std::cin,input)){
     } 
   else {
     pid_t pid = fork();
-    if(pid == 0){
-      std::stringstream ss(input);
+    std::stringstream ss(input);
       std::string word;
       std::vector<std::string>args;
       while(ss>>word){
         args.push_back(word);
+      }
+      if(args.empty()) return 0;
       
+      if(pid == 0){
+      //child process
+
+      //convert vector<string> -> char*[]
       std::vector<char*> argv;
       for(const auto& s : args){
         argv.push_back(const_cast<char*>(s.c_str()));
@@ -104,10 +109,11 @@ while(std::getline(std::cin,input)){
 
       execvp(argv[0],argv.data());
       //if execvp fails
-      perror("execvp");
+      // perror("execvp");
+      std:cerr<<input<<": command not found"<<std::endl;
       exit(1);
     
-    }}
+    }
     else if(pid > 0){
       //parent process
       wait(nullptr);
@@ -116,9 +122,13 @@ while(std::getline(std::cin,input)){
     else{
      std::cout << input << ": command not found" << std::endl;
     std::cout<<"$ ";
-    }
-
+    
   }
+
+ 
+
+
+}
   
     
  
