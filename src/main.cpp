@@ -4,6 +4,7 @@
 #include<sstream>
 #include<vector>
 #include<unistd.h>
+#include<sys/wait.h>
 // #include<io.h>
 using namespace std;
 
@@ -86,10 +87,41 @@ while(std::getline(std::cin,input)){
  
    std::cout<<"$ "; 
     } 
-  else{
-    std::cout << input << ": command not found" << std::endl;
+  else {
+    pid_t pid = fork();
+    if(pid == 0){
+      std::stringstream ss(input);
+      std::string word;
+      std::vector<std::string>args;
+      while(ss>>word){
+        args.push_back(word);
+      
+      std::vector<char*> argv;
+      for(const auto& s : args){
+        argv.push_back(const_cast<char*>(s.c_str()));
+      }
+      argv.push_back(nullptr);
+
+      execvp(argv[0],argv.data());
+      //if execvp fails
+      perror("execvp");
+      exit(1);
+    
+    }}
+    else if(pid > 0){
+      //parent process
+      wait(nullptr);
+      std::cout<<"$ ";
+    }
+    else{
+     std::cout << input << ": command not found" << std::endl;
     std::cout<<"$ ";
+    }
+
   }
+  
+    
+ 
 
 }
 }
