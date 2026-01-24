@@ -5,7 +5,7 @@
 #include<vector>
 #include<unistd.h>
 #include<sys/wait.h>
-// #include<io.h>
+#include<io.h>
 using namespace std;
 
 int main() 
