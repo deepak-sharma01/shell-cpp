@@ -5,8 +5,36 @@
 #include<vector>
 #include<unistd.h>
 #include<sys/wait.h>
+#include<limits.h>
 // #include<io.h>
+
 using namespace std;
+
+void pwdbuiltin(){
+/*char *getcwd(char *buf, size_t size);
+char*buf arguements can have two choice 
+first is cwd as buffer to store the path or as nullptr which means 
+its tells os "you allocate memory" 
+size_t size  this is the size of the buffer 
+if we provide a buffer then size = sizeof(cwd)
+otherwise put 0 inside it which means os decide for me 
+
+getcwd returns:
+
+✅ Pointer to the path string (same as buf)
+
+❌ NULL on error*/   
+
+  char *cwd = getcwd(nullptr,0);
+  if(cwd){
+    std::cout<<cwd <<std ::endl;
+    free(cwd);
+  }
+  else{
+    perror("getcwd");
+  }
+
+}
 
 int main() 
 { 
@@ -37,6 +65,10 @@ while(std::getline(std::cin,input)){
 
    else if(input.rfind("echo ",0)==0) {    
     std:: cout<<input.substr(5)<<std::endl;
+    std::cout<<"$ ";
+  }
+  else if(input.rfind("pwd ",0)==0){
+    pwdbuiltin();
     std::cout<<"$ ";
   }
    
