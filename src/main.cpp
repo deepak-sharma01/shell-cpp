@@ -49,7 +49,7 @@ char* path = getenv("PATH");
 
   // TODO: Uncomment the code below to pass the first stage
 
-std::string l[3] ={"type","echo","exit"};
+std::string l[4] ={"type","echo","exit","pwd"};
 
 std::cout << "$ ";
 
