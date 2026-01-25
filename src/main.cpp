@@ -67,8 +67,16 @@ while(std::getline(std::cin,input)){
     std:: cout<<input.substr(5)<<std::endl;
     std::cout<<"$ ";
   }
-  else if(input.rfind("pwd ",0)==0){
-    pwdbuiltin();
+else if(input.rfind("pwd",0)==0){
+      char *cwd = getcwd(nullptr,0);
+  if(cwd){
+    std::cout<<cwd <<std ::endl;
+    free(cwd);
+  }
+  else{
+    perror("getcwd");
+  }
+
     std::cout<<"$ ";
   }
    
