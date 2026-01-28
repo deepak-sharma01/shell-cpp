@@ -11,6 +11,7 @@
 using namespace std;
 
 void pwdbuiltin(){
+
 /*char *getcwd(char *buf, size_t size);
 char*buf arguements can have two choice 
 first is cwd as buffer to store the path or as nullptr which means 
@@ -40,6 +41,7 @@ void cdbuiltin(string path){
     perror("cd");
     
   }
+
 
   }
 
