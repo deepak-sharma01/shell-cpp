@@ -35,6 +35,15 @@ getcwd returns:
   }
 
 }
+void cdbuiltin(string path){
+  if(chdir(path.c_str())!= 0){
+    perror("cd");
+    std::cout << "$ ";
+  }
+
+  }
+
+
 
 int main() 
 { 
@@ -79,7 +88,10 @@ else if(input.rfind("pwd",0)==0){
 
     std::cout<<"$ ";
   }
-   
+ else if(input.rfind("cd",0)==0){
+  std::string path = input.substr(3);
+    cdbuiltin(path);
+ }  
   
    else if(input.rfind("type ",0)==0){
     bool found = false;
