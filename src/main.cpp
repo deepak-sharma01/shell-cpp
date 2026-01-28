@@ -38,7 +38,7 @@ getcwd returns:
 void cdbuiltin(string path){
   if(chdir(path.c_str())!= 0){
     perror("cd");
-    std::cout << "$ ";
+    
   }
 
   }
@@ -91,6 +91,7 @@ else if(input.rfind("pwd",0)==0){
  else if(input.rfind("cd",0)==0){
   std::string path = input.substr(3);
     cdbuiltin(path);
+    std::cout << "$ ";
  }  
   
    else if(input.rfind("type ",0)==0){
