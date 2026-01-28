@@ -38,7 +38,7 @@ getcwd returns:
 }
 void cdbuiltin(string path){
   if(chdir(path.c_str())!= 0){
-    perror("cd");
+    perror(("cd: "+ path).c_str());
     
   }
 
