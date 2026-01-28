@@ -36,7 +36,25 @@ getcwd returns:
   }
 
 }
-void cdbuiltin(string path){
+void cdbuiltin(const vector<string>args){
+  const char* home = getenv("HOME");
+  if(!home){
+    cerr<< "cd: HOME not set"<<endl;
+    return;
+  }
+  string path;
+  //cd or cd~
+  if(args.size() == 1 || args[1] =="~"){
+    path = home;
+  }
+  else if(args[1].rfind("~/",0)==0){
+    path = string(home) +args[1].substr(1);
+
+  }
+  //cd normal_path
+  else{
+    path = args[1];
+  }
   if(chdir(path.c_str())!= 0){
     perror(("cd: "+ path).c_str());
     }
@@ -91,16 +109,15 @@ else if(input.rfind("pwd",0)==0){
     std::cout<<"$ ";
   }
  else if(input.rfind("cd",0)==0){
-  std::string path = input.substr(3);
-  if(path == "~"){
- std::string home = getenv("HOME");
- chdir(home.c_str());
-  }
-    else{
-      cdbuiltin(path);
-    }
-
-    std::cout << "$ ";
+    
+    vector<string> args;
+std::stringstream ss(input);
+string token;
+while(ss >> token ){
+  args.push_back(token);
+}
+    cdbuiltin(args);
+    
  }  
   
    else if(input.rfind("type ",0)==0){
