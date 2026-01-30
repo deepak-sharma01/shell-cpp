@@ -62,6 +62,31 @@ void cdbuiltin(const vector<string>args){
 
 
   }
+  vector<string>tokenise( const string& input){
+    bool in_single_quote =false;
+    string current;
+    vector<string>args;
+    for (size_t i = 0; i < input.size(); i++)
+    {
+      if(input[i] == '\''){
+        in_single_quote = !in_single_quote;
+      }
+      else if(input[i]==' ' && !in_single_quote){
+        if(!current.empty()){
+              args.push_back(current);
+              current.clear();
+        }
+        }
+        else{
+          current+=input[i];
+        }
+    }
+    if(!current.empty()){
+      args.push_back(current);
+    }
+    return args;
+    
+  }
 
 
 
@@ -90,7 +115,14 @@ while(std::getline(std::cin,input)){
   if(input == "exit"){
                   return 0;
                 }
-
+else if(input.rfind("echo ",0)== 0){
+    string cmd = input.substr(5);
+ vector<string>args = tokenise(cmd);
+  for(const auto& s:args ){
+    cout<<s;
+    }
+    cout<<endl<<"$ ";
+}
 
    else if(input.rfind("echo ",0)==0) {    
     std:: cout<<input.substr(5)<<std::endl;
