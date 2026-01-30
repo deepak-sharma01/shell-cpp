@@ -200,12 +200,10 @@ while(ss >> token ){
     } 
   else {
     pid_t pid = fork();
-    std::stringstream ss(input);
-      std::string word;
-      std::vector<std::string>args;
-      while(ss>>word){
-        args.push_back(word);
-      }
+   
+    std::vector<std::string> args = tokenise(input);
+  
+  
       if(args.empty()) return 0;
       
       if(pid == 0){
@@ -235,10 +233,6 @@ while(ss >> token ){
     std::cout<<"$ ";
     
   }
-
- 
-
-
 }
   
     
