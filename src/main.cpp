@@ -119,7 +119,7 @@ else if(input.rfind("echo ",0)== 0){
     string cmd = input.substr(5);
  vector<string>args = tokenise(cmd);
   for(const auto& s:args ){
-    cout<<s;
+    cout<<s<<" ";
     }
     cout<<endl<<"$ ";
 }
