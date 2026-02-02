@@ -68,7 +68,7 @@ void cdbuiltin(const vector<string>args){
     vector<string>args;
     for (size_t i = 0; i < input.size(); i++)
     {
-      if(input[i] == '\''){
+      if(input[i] == '\'' || input[i] == '\"'){
         in_single_quote = !in_single_quote;
       }
       else if(input[i]==' ' && !in_single_quote){
