@@ -80,7 +80,7 @@ void cdbuiltin(const vector<string>args){
       }
       
       
-      else if(input[i]==' ' && (!in_single_quote || !in_double_quote)){
+      else if(input[i]==' ' && (!in_single_quote && !in_double_quote)){
         if(!current.empty()){
               args.push_back(current);
               current.clear();
