@@ -65,22 +65,32 @@ void cdbuiltin(const vector<string>args){
   vector<string>tokenise( const string& input){
     bool in_single_quote =false;
     bool in_double_quote = false;
+    
 
     string current;
     vector<string>args;
     for (size_t i = 0; i < input.size(); i++)
     {
-      if(input[i] == '\'' && !in_double_quote){
+      if(input[i] == '\'' && !in_double_quote ){
         in_single_quote = !in_single_quote;
 
       }
 // "\" " as " " means there is a string inside in it \" means it escaped the " therefore there is string of 0 length and string is decay to const char* when needed makes first character as pointer char == const char* not true
-      else if(input[i] == '"' && !in_single_quote) {
+      else if(input[i] == '"' && !in_single_quote ) {
         in_double_quote = !in_double_quote;
       }
+  
+      else if( input[i] == '\\' && !in_single_quote){
+        if(i+1<input.size()){ //check whether input is present or not to escaped
+          current += input[i+1];
+          i++;//  skip escaped character 
+
+        }
+      }
+    
       
       
-      else if(input[i]==' ' && (!in_single_quote && !in_double_quote)){
+      else if(input[i]==' ' && (!in_single_quote && !in_double_quote )){
         if(!current.empty()){
               args.push_back(current);
               current.clear();
@@ -96,8 +106,6 @@ void cdbuiltin(const vector<string>args){
     return args;
     
   }
-
-
 
 int main() 
 { 
