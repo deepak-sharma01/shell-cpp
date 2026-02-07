@@ -95,7 +95,7 @@ void cdbuiltin(const vector<string>args){
 
       if(in_double_quote){
         //only these are escaped in double quotes
-        if(next == '"' || next == '$' || next == '\\' || next == '\''){
+        if(next == '"' || next == '$' || next == '\\' ){
           current += next;
         }
         else{
