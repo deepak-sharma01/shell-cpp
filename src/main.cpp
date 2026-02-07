@@ -67,6 +67,7 @@ void cdbuiltin(const vector<string>args){
     bool in_single_quote =false;
     bool in_double_quote = false;
     
+    
 
     string current;
     vector<string>args;
@@ -74,28 +75,50 @@ void cdbuiltin(const vector<string>args){
     {
       if(input[i] == '\'' && !in_double_quote ){
         in_single_quote = !in_single_quote;
+        continue;
 
       }
 // "\" " as " " means there is a string inside in it \" means it escaped the " therefore there is string of 0 length and string is decay to const char* when needed makes first character as pointer char == const char* not true
       else if(input[i] == '"' && !in_single_quote ) {
         in_double_quote = !in_double_quote;
+        continue;
       }
   
-      else if( input[i] == '\\' && !in_single_quote){
-        if(i+1<input.size()){ //check whether input is present or not to escaped
-          current += input[i+1];
-          i++;//  skip escaped character 
+     if(input[i]=='\\'){
+      if(in_single_quote){
+        // literal in single quotes
+        current += input[i];
+      } else if(i+1 <input.size()){
+       
 
+       char next = input[++i];
+
+      if(in_double_quote){
+        //only these are escaped in double quotes
+        if(next == '"' || next == '$' || next == '\\' || next == '\''){
+          current += next;
         }
+        else{
+          current += '\\';
+        current += next;  
+      }
+      }
+     else {
+      current +=next;
+     }
+   
+      }
+    continue;
       }
     
       
       
-      else if(input[i]==' ' && (!in_single_quote && !in_double_quote )){
+      if(input[i] == ' ' && (!in_single_quote && !in_double_quote )){
         if(!current.empty()){
               args.push_back(current);
               current.clear();
         }
+        
         }
         else{
           current+=input[i];
@@ -252,9 +275,5 @@ while(ss >> token ){
     
   }
 }
-  
-    
- 
-
 }
 }
